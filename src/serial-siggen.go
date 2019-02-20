@@ -23,7 +23,7 @@ var stopbits_map = map[int] serial.StopBits {
 }
 
 func append2log (log *os.File, t0 time.Time, t1 time.Time, line string) {
-    var fullline string = fmt.Sprintf("%d.%09d,%d.%09d,%s\n", t0.Unix(), t0.Nanosecond(), t1.Unix(), t1.Nanosecond(), line)
+    var fullline string = fmt.Sprintf("%d.%09d,%d.%09d,%s", t0.Unix(), t0.Nanosecond(), t1.Unix(), t1.Nanosecond(), line)
     
     if _, err := log.Write([]byte(fullline)) ; err != nil {
         fmt.Println(err)
@@ -111,7 +111,7 @@ func main () {
             fmt.Println(err)
             os.Exit(4)
         }
-        fmt.Printf("TODO: Make sure that all is transmitted: %d", n)
+        fmt.Printf("TODO: %dB transmitted. Make sure that is all by looping ...\n", n)
         var t1 time.Time = time.Now()
         
         // log transmitted string
